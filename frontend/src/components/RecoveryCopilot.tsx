@@ -17,7 +17,7 @@ const QUICK_QUESTIONS = [
 ]
 
 const EMPHASIS =
-  /₹[\d,]+(?:\.\d+)?|\b\d+(?:\.\d+)?%|\b(?:payment_method_update|retry_now|retry_later|generate_payment_link|send_email|retention_offer|stop_recovery)\b|\bEVT_[A-Z0-9]+\b|\bCUS_[A-Z0-9]+\b|\b(?:CRITICAL|HIGH|MEDIUM|LOW)\b|\b(?:ALLOW|BLOCK)\b|\b(?:RECOVERED|NOT_RECOVERED|PENDING|NO_ACTION|WAITING_FOR_CUSTOMER)\b/gi
+  /\*\*(.+?)\*\*|₹[\d,]+(?:\.\d+)?|\b\d+(?:\.\d+)?%|\b(?:payment_method_update|retry_now|retry_later|generate_payment_link|send_email|retention_offer|stop_recovery)\b|\bEVT_[A-Z0-9]+\b|\bCUS_[A-Z0-9]+\b|\b(?:CRITICAL|HIGH|MEDIUM|LOW)\b|\b(?:ALLOW|BLOCK)\b|\b(?:RECOVERED|NOT_RECOVERED|PENDING|NO_ACTION|WAITING_FOR_CUSTOMER|WAIT_FOR_CUSTOMER|ESCALATE_TO_MERCHANT|STOP_RECOVERY)\b/gi
 
 export function RecoveryCopilot({ eventId }: { eventId: string }) {
   const [question, setQuestion] = useState("")
@@ -246,7 +246,15 @@ function CopilotAnswerPanel({ result }: { result: CopilotAskResponse }) {
 
 function AnswerBlock({ text, lead }: { text: string; lead: boolean }) {
   const facts = /^facts:\s*/i.test(text)
+  // Strip any leading "Facts:" prefix the fallback might still emit
   const body = facts ? text.replace(/^facts:\s*/i, "") : text
+  // Split on semicolons that appear between sentences (legacy fallback guard)
+  const sentences = body
+    .split(/;\s*/)
+    .map((s) => s.trim())
+    .filter(Boolean)
+  const unified = sentences.join(" ")
+
   return (
     <div
       className={cn(
@@ -264,7 +272,7 @@ function AnswerBlock({ text, lead }: { text: string; lead: boolean }) {
           lead && !facts && "text-[15px] leading-8",
         )}
       >
-        {emphasize(body, lead && !facts)}
+        {emphasize(unified, lead && !facts)}
       </p>
     </div>
   )
@@ -293,9 +301,11 @@ function highlightTokens(text: string): ReactNode[] {
     if (match.index > cursor) {
       nodes.push(text.slice(cursor, match.index))
     }
+    // match[1] is set when the **bold** pattern matched — use inner text
+    const label = match[1] !== undefined ? match[1] : match[0]
     nodes.push(
       <strong key={`h-${index}`} className="font-semibold text-foreground">
-        {match[0]}
+        {label}
       </strong>,
     )
     index += 1
