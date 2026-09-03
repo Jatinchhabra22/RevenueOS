@@ -1,0 +1,886 @@
+{
+  "workflow_id": "WF_191b1ac6f9",
+  "event_id": "EVT_000861",
+  "diagnosis": {
+    "primary_issue": "card expired on a repeated payment failure event",
+    "recoverability_reason": "Retrying the expired instrument is unlikely to recover the payment.",
+    "churn_concern": "Churn probability is 41%.",
+    "customer_context": "777 days tenure; 78% historical success",
+    "recommended_strategy": "Ask the customer to update the payment method rather than retrying the same instrument.",
+    "issue_category": "expired_payment_method",
+    "event_summary": "repeated_payment_failure of \u20b94,772 failed due to card expired (attempt 3).",
+    "key_factors": [
+      "Failure reason: card expired",
+      "Amount at risk: \u20b94,772",
+      "777 days tenure",
+      "78% historical success",
+      "Model recovery probability: 57%"
+    ],
+    "risk_notes": [
+      "Diagnosis is explanatory only and does not invent probabilities."
+    ],
+    "source": "fallback"
+  },
+  "recovery_prediction": {
+    "probability": 0.5688906838330899,
+    "recoverability": "medium",
+    "model_type": "LogisticRegression",
+    "model_version": "0.1.0",
+    "fallback": false,
+    "contributing_factors": [
+      "num__recent_transaction_count increases the predicted probability (linear contribution)",
+      "num__previous_failures decreases the predicted probability (linear contribution)",
+      "cat__urgency_high decreases the predicted probability (linear contribution)",
+      "num__recent_failure_rate decreases the predicted probability (linear contribution)"
+    ]
+  },
+  "churn_prediction": {
+    "probability": 0.4091452584274121,
+    "risk_category": "medium",
+    "model_type": "LogisticRegression",
+    "model_version": "0.1.0",
+    "fallback": false,
+    "contributing_factors": [
+      "num__customer_ltv decreases the predicted probability (linear contribution)",
+      "num__total_spend increases the predicted probability (linear contribution)",
+      "num__total_orders decreases the predicted probability (linear contribution)",
+      "num__engagement_score decreases the predicted probability (linear contribution)"
+    ]
+  },
+  "risk_assessment": {
+    "event_id": "EVT_000861",
+    "customer_id": "CUS_002734",
+    "amount_at_risk": 4771.66,
+    "recovery_probability": 0.5688906838330899,
+    "churn_probability": 0.4091452584274121,
+    "customer_ltv": 145262.58,
+    "urgency": "high",
+    "expected_recovery_value": 2714.55292,
+    "priority_score": 60.7717,
+    "priority_category": "HIGH",
+    "component_scores": {
+      "expected_recovery": 0.542911,
+      "customer_value": 0.726313,
+      "churn_risk": 0.409145,
+      "urgency": 1.0
+    },
+    "contributing_factors": [
+      "HIGH priority because: Expected recoverable revenue is \u20b92,715 (57% \u00d7 \u20b94,772)",
+      "High customer lifetime value (\u20b9145,263)",
+      "Moderate churn probability (41%)",
+      "Event urgency is high"
+    ]
+  },
+  "candidate_actions": [
+    {
+      "action_id": "EVT_000861-ACT-01",
+      "action_type": "payment_method_update",
+      "eligibility": true,
+      "expected_effect": "high",
+      "friction": "medium",
+      "estimated_cost": "medium",
+      "rationale": "Ask the customer to replace the payment instrument.",
+      "required_inputs": [
+        "event_id"
+      ]
+    },
+    {
+      "action_id": "EVT_000861-ACT-02",
+      "action_type": "generate_payment_link",
+      "eligibility": true,
+      "expected_effect": "medium",
+      "friction": "medium",
+      "estimated_cost": "medium",
+      "rationale": "Alternate payment path via a payment link.",
+      "required_inputs": [
+        "event_id"
+      ]
+    },
+    {
+      "action_id": "EVT_000861-ACT-03",
+      "action_type": "send_email",
+      "eligibility": true,
+      "expected_effect": "medium",
+      "friction": "low",
+      "estimated_cost": "low",
+      "rationale": "Low-friction payment reminder. This action was used before on the event; guardrails may still block it.",
+      "required_inputs": [
+        "event_id"
+      ]
+    },
+    {
+      "action_id": "EVT_000861-ACT-04",
+      "action_type": "stop_recovery",
+      "eligibility": true,
+      "expected_effect": "none",
+      "friction": "low",
+      "estimated_cost": "none",
+      "rationale": "Stop automated recovery for this event.",
+      "required_inputs": [
+        "event_id"
+      ]
+    }
+  ],
+  "selected_action": {
+    "action_id": "EVT_000861-ACT-01",
+    "action_type": "payment_method_update",
+    "eligibility": true,
+    "expected_effect": "high",
+    "friction": "medium",
+    "estimated_cost": "medium",
+    "rationale": "Ask the customer to replace the payment instrument.",
+    "required_inputs": [
+      "event_id"
+    ]
+  },
+  "decision": {
+    "selected_action_id": "EVT_000861-ACT-01",
+    "selected_action_type": "payment_method_update",
+    "reason": "Deterministic policy selected payment_method_update for failure 'card_expired' given recovery/churn/priority context. Priority is HIGH with ERV \u20b92,715.",
+    "confidence": 0.55,
+    "alternative_considered": "generate_payment_link",
+    "source": "fallback",
+    "informed_by_observations": null,
+    "historical_note": null
+  },
+  "guardrail_result": {
+    "allowed": true,
+    "status": "ALLOW",
+    "reason": "All policy checks passed",
+    "violations": [],
+    "reason_codes": [
+      "POLICY_CLEAR"
+    ]
+  },
+  "execution_result": {
+    "action_id": "EVT_000861-ACT-01",
+    "action_type": "payment_method_update",
+    "execution_id": "EXE_de8b619f1c60",
+    "status": "executed",
+    "timestamp": "2026-09-03T08:13:03.840245Z",
+    "message": "Simulated payment-method update request sent.",
+    "metadata": {
+      "simulated_outcome": "RECOVERED",
+      "simulated_amount_recovered": 4771.66,
+      "integration": "simulation"
+    }
+  },
+  "outcome": {
+    "outcome": "RECOVERED",
+    "action_type": "payment_method_update",
+    "execution_status": "executed",
+    "amount_recovered": 4771.66,
+    "remaining_amount_at_risk": 0.0,
+    "customer_impact": "Payment recovered; immediate revenue risk closed.",
+    "timestamp": "2026-09-03T08:13:03.840245Z",
+    "explanation": "Simulated payment-method update request sent."
+  },
+  "final_decision": "completed",
+  "status": "completed",
+  "used_llm": false,
+  "dry_run": false,
+  "audit_trail": [
+    {
+      "timestamp": "2026-09-03T08:13:03.809638Z",
+      "stage": "assemble_context",
+      "decision": "context_ready",
+      "reason": "Event EVT_000861 context assembled from provided.",
+      "metadata": {
+        "event_id": "EVT_000861"
+      }
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.833387Z",
+      "stage": "get_predictions",
+      "decision": "scored",
+      "reason": "Recovery and churn probabilities generated by ML services.",
+      "metadata": {
+        "recovery_probability": 0.5688906838330899,
+        "churn_probability": 0.4091452584274121
+      }
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.833807Z",
+      "stage": "assess_revenue_risk",
+      "decision": "HIGH",
+      "reason": "ERV \u20b92,715; score 60.8.",
+      "metadata": {}
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.834039Z",
+      "stage": "supervisor",
+      "decision": "INVESTIGATE",
+      "reason": "Evidence has not been gathered.",
+      "metadata": {
+        "source": "fallback"
+      }
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.834553Z",
+      "stage": "investigate_context",
+      "decision": "evidence_ready",
+      "reason": "Observed card_expired on an open recovery event. This summary uses tool results only; inferences are labeled in later nodes.",
+      "metadata": {
+        "tools_used": [
+          "get_event_details",
+          "get_customer_profile",
+          "get_payment_history",
+          "get_subscription_context",
+          "get_previous_interventions",
+          "get_recent_payment_failures",
+          "get_customer_engagement_context",
+          "get_recovery_prediction",
+          "get_churn_prediction",
+          "calculate_revenue_risk",
+          "get_action_effectiveness",
+          "get_similar_historical_outcomes"
+        ],
+        "source": "fallback"
+      }
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.835008Z",
+      "stage": "diagnose_event",
+      "decision": "expired_payment_method",
+      "reason": "card expired on a repeated payment failure event",
+      "metadata": {
+        "source": "fallback"
+      }
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.835256Z",
+      "stage": "analyze_customer",
+      "decision": "medium",
+      "reason": "Value band high; churn signal medium (model P(churn)=41%). ML probability is a fact, not rewritten.",
+      "metadata": {
+        "source": "fallback"
+      }
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.835530Z",
+      "stage": "generate_candidate_actions",
+      "decision": "payment_method_update,generate_payment_link,send_email,stop_recovery",
+      "reason": "Generated 4 eligible actions.",
+      "metadata": {
+        "action_ids": [
+          "EVT_000861-ACT-01",
+          "EVT_000861-ACT-02",
+          "EVT_000861-ACT-03",
+          "EVT_000861-ACT-04"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.835799Z",
+      "stage": "select_action",
+      "decision": "payment_method_update",
+      "reason": "Deterministic policy selected payment_method_update for failure 'card_expired' given recovery/churn/priority context. Priority is HIGH with ERV \u20b92,715.",
+      "metadata": {
+        "source": "fallback",
+        "confidence": 0.55,
+        "informed_by_observations": null
+      }
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.836048Z",
+      "stage": "validate_guardrails",
+      "decision": "ALLOW",
+      "reason": "All policy checks passed",
+      "metadata": {
+        "violations": []
+      }
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.836213Z",
+      "stage": "route_next_step",
+      "decision": "execute_action",
+      "reason": "Proceed to bounded simulated execution.",
+      "metadata": {}
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.840251Z",
+      "stage": "execute_action",
+      "decision": "executed",
+      "reason": "Simulated payment-method update request sent.",
+      "metadata": {
+        "execution_id": "EXE_de8b619f1c60",
+        "action_type": "payment_method_update"
+      }
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.840453Z",
+      "stage": "monitor_result",
+      "decision": "RECOVERED",
+      "reason": "Simulated payment-method update request sent.",
+      "metadata": {
+        "amount_recovered": 4771.66
+      }
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.840632Z",
+      "stage": "reflect_outcome",
+      "decision": "RECOVERED",
+      "reason": "Stop. Money recovered.",
+      "metadata": {
+        "source": "fallback"
+      }
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.840817Z",
+      "stage": "supervisor",
+      "decision": "RECOVERED",
+      "reason": "Observed recovery is terminal.",
+      "metadata": {
+        "source": "fallback"
+      }
+    },
+    {
+      "timestamp": "2026-09-03T08:13:03.841044Z",
+      "stage": "finalize",
+      "decision": "RECOVERED",
+      "reason": "Workflow ended with status completed.",
+      "metadata": {}
+    }
+  ],
+  "agent_mode": "deterministic_fallback",
+  "provider": null,
+  "model": null,
+  "fallback_used": true,
+  "iterations": 1,
+  "current_stage": "END",
+  "workflow_status": "RECOVERED",
+  "terminal_reason": "RECOVERED",
+  "investigation": {
+    "facts_found": [
+      "Event EVT_000861 is repeated_payment_failure with \u20b94,772 at risk",
+      "Failure reason: card_expired",
+      "Status: open",
+      "Customer tenure 777 days; LTV \u20b9145,263"
+    ],
+    "important_signals": [
+      "repeated attempt on this event",
+      "1 prior interventions recorded"
+    ],
+    "missing_information": [],
+    "anomalies": [],
+    "evidence_summary": "Observed card_expired on an open recovery event. This summary uses tool results only; inferences are labeled in later nodes.",
+    "confidence": 0.7,
+    "source": "fallback",
+    "tools_used": [
+      "get_event_details",
+      "get_customer_profile",
+      "get_payment_history",
+      "get_subscription_context",
+      "get_previous_interventions",
+      "get_recent_payment_failures",
+      "get_customer_engagement_context",
+      "get_recovery_prediction",
+      "get_churn_prediction",
+      "calculate_revenue_risk",
+      "get_action_effectiveness",
+      "get_similar_historical_outcomes"
+    ]
+  },
+  "customer_analysis": {
+    "customer_value_band": "high",
+    "churn_risk": "medium",
+    "relationship_strength": "strong",
+    "contact_sensitivity": "medium",
+    "recovery_sensitivity": "medium",
+    "recommended_tone": "low_friction",
+    "key_customer_signals": [
+      "historical payment success 78%",
+      "activity trend stable"
+    ],
+    "summary": "Value band high; churn signal medium (model P(churn)=41%). ML probability is a fact, not rewritten.",
+    "source": "fallback",
+    "ml_churn_probability": 0.4091452584274121
+  },
+  "strategy": {
+    "recommended_action": "payment_method_update",
+    "alternative_action": "generate_payment_link",
+    "action_ranking": [],
+    "reasoning_summary": "Deterministic policy selected payment_method_update for failure 'card_expired' given recovery/churn/priority context. Priority is HIGH with ERV \u20b92,715.",
+    "expected_effect": "high",
+    "customer_impact": "Friction medium",
+    "confidence": 0.55,
+    "source": "fallback"
+  },
+  "reflection": {
+    "outcome_interpretation": "The simulated intervention recovered the amount at risk.",
+    "strategy_assessment": "The selected action achieved the recovery goal.",
+    "new_information": "Revenue is no longer at risk for this event.",
+    "recommended_next_step": "RECOVERED",
+    "avoid_actions": [],
+    "confidence": 0.8,
+    "summary": "Stop. Money recovered.",
+    "source": "fallback"
+  },
+  "agent_trace": [
+    {
+      "trace_id": "TR_5687ebebc3",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "supervisor",
+      "event_type": "SUPERVISOR_DECISION",
+      "timestamp": "2026-09-03T08:13:03.834053Z",
+      "status": "ok",
+      "summary": "Evidence has not been gathered.",
+      "tool_name": null,
+      "decision": "INVESTIGATE",
+      "fallback_used": true,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_9ea8560950",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_CALL",
+      "timestamp": "2026-09-03T08:13:03.834401Z",
+      "status": "ok",
+      "summary": "Called get_event_details",
+      "tool_name": "get_event_details",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_8922470fb6",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_RESULT",
+      "timestamp": "2026-09-03T08:13:03.834411Z",
+      "status": "ok",
+      "summary": "Received get_event_details",
+      "tool_name": "get_event_details",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_8323e05cd3",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_CALL",
+      "timestamp": "2026-09-03T08:13:03.834418Z",
+      "status": "ok",
+      "summary": "Called get_customer_profile",
+      "tool_name": "get_customer_profile",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_6b1d310f99",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_RESULT",
+      "timestamp": "2026-09-03T08:13:03.834423Z",
+      "status": "ok",
+      "summary": "Received get_customer_profile",
+      "tool_name": "get_customer_profile",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_352a2e4be4",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_CALL",
+      "timestamp": "2026-09-03T08:13:03.834429Z",
+      "status": "ok",
+      "summary": "Called get_payment_history",
+      "tool_name": "get_payment_history",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_88a06a1355",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_RESULT",
+      "timestamp": "2026-09-03T08:13:03.834435Z",
+      "status": "ok",
+      "summary": "Received get_payment_history",
+      "tool_name": "get_payment_history",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_03128ca8b7",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_CALL",
+      "timestamp": "2026-09-03T08:13:03.834440Z",
+      "status": "ok",
+      "summary": "Called get_subscription_context",
+      "tool_name": "get_subscription_context",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_1494b3f2ad",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_RESULT",
+      "timestamp": "2026-09-03T08:13:03.834446Z",
+      "status": "ok",
+      "summary": "Received get_subscription_context",
+      "tool_name": "get_subscription_context",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_b008422de3",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_CALL",
+      "timestamp": "2026-09-03T08:13:03.834452Z",
+      "status": "ok",
+      "summary": "Called get_previous_interventions",
+      "tool_name": "get_previous_interventions",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_eefb166662",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_RESULT",
+      "timestamp": "2026-09-03T08:13:03.834458Z",
+      "status": "ok",
+      "summary": "Received get_previous_interventions",
+      "tool_name": "get_previous_interventions",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_10cb7f9f10",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_CALL",
+      "timestamp": "2026-09-03T08:13:03.834463Z",
+      "status": "ok",
+      "summary": "Called get_recent_payment_failures",
+      "tool_name": "get_recent_payment_failures",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_220dde3d8c",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_RESULT",
+      "timestamp": "2026-09-03T08:13:03.834469Z",
+      "status": "ok",
+      "summary": "Received get_recent_payment_failures",
+      "tool_name": "get_recent_payment_failures",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_fe0a922c25",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_CALL",
+      "timestamp": "2026-09-03T08:13:03.834474Z",
+      "status": "ok",
+      "summary": "Called get_customer_engagement_context",
+      "tool_name": "get_customer_engagement_context",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_500c045e6d",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_RESULT",
+      "timestamp": "2026-09-03T08:13:03.834480Z",
+      "status": "ok",
+      "summary": "Received get_customer_engagement_context",
+      "tool_name": "get_customer_engagement_context",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_506084a8df",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_CALL",
+      "timestamp": "2026-09-03T08:13:03.834485Z",
+      "status": "ok",
+      "summary": "Called get_recovery_prediction",
+      "tool_name": "get_recovery_prediction",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_49d0c1ecce",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_RESULT",
+      "timestamp": "2026-09-03T08:13:03.834490Z",
+      "status": "ok",
+      "summary": "Received get_recovery_prediction",
+      "tool_name": "get_recovery_prediction",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_b3fd8472d8",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_CALL",
+      "timestamp": "2026-09-03T08:13:03.834496Z",
+      "status": "ok",
+      "summary": "Called get_churn_prediction",
+      "tool_name": "get_churn_prediction",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_e5bd907883",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_RESULT",
+      "timestamp": "2026-09-03T08:13:03.834501Z",
+      "status": "ok",
+      "summary": "Received get_churn_prediction",
+      "tool_name": "get_churn_prediction",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_7fd5ab305d",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_CALL",
+      "timestamp": "2026-09-03T08:13:03.834507Z",
+      "status": "ok",
+      "summary": "Called calculate_revenue_risk",
+      "tool_name": "calculate_revenue_risk",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_3e43fabfab",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_RESULT",
+      "timestamp": "2026-09-03T08:13:03.834512Z",
+      "status": "ok",
+      "summary": "Received calculate_revenue_risk",
+      "tool_name": "calculate_revenue_risk",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_68aa023a58",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_CALL",
+      "timestamp": "2026-09-03T08:13:03.834517Z",
+      "status": "ok",
+      "summary": "Called get_action_effectiveness",
+      "tool_name": "get_action_effectiveness",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_d3c064996a",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_RESULT",
+      "timestamp": "2026-09-03T08:13:03.834522Z",
+      "status": "ok",
+      "summary": "Received get_action_effectiveness",
+      "tool_name": "get_action_effectiveness",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_2afb9fc03a",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_CALL",
+      "timestamp": "2026-09-03T08:13:03.834528Z",
+      "status": "ok",
+      "summary": "Called get_similar_historical_outcomes",
+      "tool_name": "get_similar_historical_outcomes",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_aa8a7d4781",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "TOOL_RESULT",
+      "timestamp": "2026-09-03T08:13:03.834533Z",
+      "status": "ok",
+      "summary": "Received get_similar_historical_outcomes",
+      "tool_name": "get_similar_historical_outcomes",
+      "decision": null,
+      "fallback_used": false,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_27cd24a563",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "investigator",
+      "event_type": "INVESTIGATION_COMPLETE",
+      "timestamp": "2026-09-03T08:13:03.834713Z",
+      "status": "ok",
+      "summary": "Observed card_expired on an open recovery event. This summary uses tool results only; inferences are labeled in later nodes.",
+      "tool_name": null,
+      "decision": null,
+      "fallback_used": true,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_897e9050a5",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "diagnosis",
+      "event_type": "DIAGNOSIS_COMPLETE",
+      "timestamp": "2026-09-03T08:13:03.835020Z",
+      "status": "ok",
+      "summary": "card expired on a repeated payment failure event",
+      "tool_name": null,
+      "decision": null,
+      "fallback_used": true,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_78c9de3233",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "customer_analyst",
+      "event_type": "CUSTOMER_ANALYSIS_COMPLETE",
+      "timestamp": "2026-09-03T08:13:03.835265Z",
+      "status": "ok",
+      "summary": "Value band high; churn signal medium (model P(churn)=41%). ML probability is a fact, not rewritten.",
+      "tool_name": null,
+      "decision": null,
+      "fallback_used": true,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_93adea5b03",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "strategist",
+      "event_type": "STRATEGY_COMPLETE",
+      "timestamp": "2026-09-03T08:13:03.835809Z",
+      "status": "ok",
+      "summary": "Deterministic policy selected payment_method_update for failure 'card_expired' given recovery/churn/priority context. Priority is HIGH with ERV \u20b92,715.",
+      "tool_name": null,
+      "decision": "payment_method_update",
+      "fallback_used": true,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_0b53b6b005",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "reflection",
+      "event_type": "REFLECTION_COMPLETE",
+      "timestamp": "2026-09-03T08:13:03.840640Z",
+      "status": "ok",
+      "summary": "Stop. Money recovered.",
+      "tool_name": null,
+      "decision": "RECOVERED",
+      "fallback_used": true,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_cd89ea6ed8",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "supervisor",
+      "event_type": "SUPERVISOR_DECISION",
+      "timestamp": "2026-09-03T08:13:03.840825Z",
+      "status": "ok",
+      "summary": "Observed recovery is terminal.",
+      "tool_name": null,
+      "decision": "RECOVERED",
+      "fallback_used": true,
+      "duration_ms": null
+    },
+    {
+      "trace_id": "TR_6dc1981524",
+      "workflow_id": "WF_191b1ac6f9",
+      "iteration": 1,
+      "agent": "supervisor",
+      "event_type": "WORKFLOW_TERMINATED",
+      "timestamp": "2026-09-03T08:13:03.841052Z",
+      "status": "ok",
+      "summary": "Workflow ended with status completed.",
+      "tool_name": null,
+      "decision": "RECOVERED",
+      "fallback_used": false,
+      "duration_ms": null
+    }
+  ],
+  "iteration_history": [
+    {
+      "iteration": 1,
+      "action_type": "payment_method_update",
+      "guardrail": "ALLOW",
+      "outcome": "RECOVERED",
+      "amount_recovered": 4771.66,
+      "execution_id": "EXE_de8b619f1c60"
+    }
+  ],
+  "llm_call_count": 0,
+  "outcome_context": {
+    "failure_reason": "card_expired",
+    "payment_method": "card",
+    "event_type": "repeated_payment_failure",
+    "customer_ltv": 145262.58
+  }
+}

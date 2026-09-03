@@ -1,0 +1,63 @@
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+backend/.venv/
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+*.joblib
+*.pkl
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+
+# Data and artifacts (keep directory placeholders)
+data/raw/*
+data/processed/*
+data/demo/*
+data/synthetic/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/demo/.gitkeep
+!data/synthetic/.gitkeep
+data/new-data/**
+!data/new-data/README.md
+!data/new-data/index.json
+data/uploads/*
+!data/uploads/.gitkeep
+artifacts/models/*
+artifacts/metrics/*
+!artifacts/models/.gitkeep
+!artifacts/metrics/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Logs
+*.log
+logs/

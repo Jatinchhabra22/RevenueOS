@@ -1,0 +1,65 @@
+[
+  {
+    "folder": "tiny_40_customers",
+    "description": "Fastest upload check. Compare Data page counts to expected_counts.csv.",
+    "merchant_id": "MERCHANT_UPLOAD_TINY",
+    "seed": 801,
+    "csv_files": [
+      "customers.csv",
+      "transactions.csv",
+      "subscriptions.csv",
+      "revenue_events.csv",
+      "intervention_history.csv"
+    ],
+    "row_counts": {
+      "customers": 40,
+      "transactions": 506,
+      "subscriptions": 15,
+      "revenue_events": 59,
+      "intervention_history": 74
+    },
+    "open_events": 5
+  },
+  {
+    "folder": "small_100_customers",
+    "description": "Slightly larger book so Opportunities has more open events.",
+    "merchant_id": "MERCHANT_UPLOAD_SMALL",
+    "seed": 802,
+    "csv_files": [
+      "customers.csv",
+      "transactions.csv",
+      "subscriptions.csv",
+      "revenue_events.csv",
+      "intervention_history.csv"
+    ],
+    "row_counts": {
+      "customers": 100,
+      "transactions": 1203,
+      "subscriptions": 43,
+      "revenue_events": 145,
+      "intervention_history": 185
+    },
+    "open_events": 17
+  },
+  {
+    "folder": "mid_80_customers",
+    "description": "Independent 80-customer book for a second upload pass.",
+    "merchant_id": "MERCHANT_UPLOAD_UPI",
+    "seed": 803,
+    "csv_files": [
+      "customers.csv",
+      "transactions.csv",
+      "subscriptions.csv",
+      "revenue_events.csv",
+      "intervention_history.csv"
+    ],
+    "row_counts": {
+      "customers": 80,
+      "transactions": 934,
+      "subscriptions": 37,
+      "revenue_events": 109,
+      "intervention_history": 131
+    },
+    "open_events": 12
+  }
+]

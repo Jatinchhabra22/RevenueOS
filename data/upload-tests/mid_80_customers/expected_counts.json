@@ -1,0 +1,21 @@
+{
+  "folder": "mid_80_customers",
+  "description": "Independent 80-customer book for a second upload pass.",
+  "merchant_id": "MERCHANT_UPLOAD_UPI",
+  "seed": 803,
+  "csv_files": [
+    "customers.csv",
+    "transactions.csv",
+    "subscriptions.csv",
+    "revenue_events.csv",
+    "intervention_history.csv"
+  ],
+  "row_counts": {
+    "customers": 80,
+    "transactions": 934,
+    "subscriptions": 37,
+    "revenue_events": 109,
+    "intervention_history": 131
+  },
+  "open_events": 12
+}

@@ -1,0 +1,19 @@
+{
+  "weight_expected_recovery": 0.45,
+  "weight_customer_value": 0.25,
+  "weight_churn_risk": 0.20,
+  "weight_urgency": 0.10,
+  "erv_reference": 5000,
+  "ltv_reference": 200000,
+  "urgency_high": 1.0,
+  "urgency_medium": 0.55,
+  "urgency_low": 0.20,
+  "urgency_missing": 0.40,
+    "threshold_critical": 70,
+    "threshold_high": 50,
+    "threshold_medium": 30,
+    "pursue_min_erv": 100,
+    "not_recoverable_erv": 80,
+    "low_recoverability_probability": 0.35,
+    "not_recoverable_probability": 0.18
+}

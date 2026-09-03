@@ -1,0 +1,19 @@
+{
+  "merchant_id": "MERCHANT_UPLOAD_TINY",
+  "max_retry_attempts": 3,
+  "max_contact_attempts": 3,
+  "contact_cooldown_hours": 24,
+  "high_value_escalation_threshold": 50000,
+  "low_value_stop_threshold": 100,
+  "allowed_actions": [
+    "retry_now",
+    "retry_later",
+    "payment_link",
+    "email",
+    "whatsapp",
+    "payment_method_update",
+    "retention_offer",
+    "escalate_to_human",
+    "stop_recovery"
+  ]
+}

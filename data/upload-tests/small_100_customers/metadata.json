@@ -1,0 +1,48 @@
+{
+  "dataset_version": "0.1.0",
+  "generation_timestamp": "2026-09-02T11:42:50.154106+00:00",
+  "random_seed": 802,
+  "merchant_id": "MERCHANT_UPLOAD_SMALL",
+  "config": {
+    "seed": 802,
+    "n_customers": 100,
+    "merchant_id": "MERCHANT_UPLOAD_SMALL",
+    "as_of": "2026-09-01",
+    "currency": "INR",
+    "subscription_rate": 0.42
+  },
+  "row_counts": {
+    "customers": 100,
+    "transactions": 1203,
+    "subscriptions": 43,
+    "revenue_events": 145,
+    "intervention_history": 185
+  },
+  "recovery_rate": 0.5135135135135135,
+  "churn_rate": 0.19,
+  "validation": {
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "row_counts": {
+      "customers": 100,
+      "transactions": 1203,
+      "subscriptions": 43,
+      "revenue_events": 145,
+      "intervention_history": 185
+    },
+    "recovery_rate": 0.5135135135135135,
+    "churn_rate": 0.19,
+    "failure_reason_distribution": {
+      "": 950,
+      "insufficient_funds": 54,
+      "network_error": 48,
+      "bank_declined": 39,
+      "payment_timeout": 39,
+      "card_expired": 21,
+      "upi_failure": 20,
+      "technical_error": 17,
+      "authentication_failed": 15
+    }
+  }
+}

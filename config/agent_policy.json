@@ -1,0 +1,16 @@
+{
+  "max_interventions_per_event": 3,
+  "max_retry_actions": 3,
+  "max_contact_actions": 3,
+  "cooldown_hours": 24,
+  "require_open_event": true,
+  "allowed_actions": [
+    "retry_now",
+    "retry_later",
+    "generate_payment_link",
+    "send_email",
+    "payment_method_update",
+    "retention_offer",
+    "stop_recovery"
+  ]
+}

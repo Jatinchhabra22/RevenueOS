@@ -1,0 +1,21 @@
+{
+  "folder": "small_100_customers",
+  "description": "Slightly larger book so Opportunities has more open events.",
+  "merchant_id": "MERCHANT_UPLOAD_SMALL",
+  "seed": 802,
+  "csv_files": [
+    "customers.csv",
+    "transactions.csv",
+    "subscriptions.csv",
+    "revenue_events.csv",
+    "intervention_history.csv"
+  ],
+  "row_counts": {
+    "customers": 100,
+    "transactions": 1203,
+    "subscriptions": 43,
+    "revenue_events": 145,
+    "intervention_history": 185
+  },
+  "open_events": 17
+}

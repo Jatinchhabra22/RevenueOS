@@ -1,0 +1,101 @@
+[
+  {
+    "folder": "compact_seed7",
+    "seed": 7,
+    "scenario": "balanced",
+    "customers": 80,
+    "revenue_events": 111,
+    "recovery_rate": 0.5476190476190477,
+    "churn_rate": 0.2125,
+    "description": "Small balanced book. Fast upload and UI smoke tests.",
+    "ok": true
+  },
+  {
+    "folder": "midmarket_seed101",
+    "seed": 101,
+    "scenario": "balanced",
+    "customers": 400,
+    "revenue_events": 591,
+    "recovery_rate": 0.4933510638297872,
+    "churn_rate": 0.2825,
+    "description": "Medium balanced book for ranking and scoring time checks.",
+    "ok": true
+  },
+  {
+    "folder": "high_volume_seed202",
+    "seed": 202,
+    "scenario": "balanced",
+    "customers": 1200,
+    "revenue_events": 1690,
+    "recovery_rate": 0.48534201954397393,
+    "churn_rate": 0.25666666666666665,
+    "description": "Larger balanced book. Check opportunity list performance.",
+    "ok": true
+  },
+  {
+    "folder": "train_holdout_seed303",
+    "seed": 303,
+    "scenario": "balanced",
+    "customers": 800,
+    "revenue_events": 1137,
+    "recovery_rate": 0.47498286497601094,
+    "churn_rate": 0.2925,
+    "description": "Independent seed for optional model retraining \u2014 does not replace data/demo.",
+    "ok": true
+  },
+  {
+    "folder": "eval_compact_seed404",
+    "seed": 404,
+    "scenario": "balanced",
+    "customers": 150,
+    "revenue_events": 198,
+    "recovery_rate": 0.4819277108433735,
+    "churn_rate": 0.2,
+    "description": "Small evaluation book after training on another pack.",
+    "ok": true
+  },
+  {
+    "folder": "scenario_upi_rail_seed501",
+    "seed": 501,
+    "scenario": "upi_rail",
+    "customers": 280,
+    "revenue_events": 399,
+    "recovery_rate": 0.5131313131313131,
+    "churn_rate": 0.23214285714285715,
+    "description": "UPI-heavy timeouts and UPI failures. Agent should prefer retries / payment links.",
+    "ok": true
+  },
+  {
+    "folder": "scenario_expired_cards_seed502",
+    "seed": 502,
+    "scenario": "expired_instruments",
+    "customers": 280,
+    "revenue_events": 397,
+    "recovery_rate": 0.47904191616766467,
+    "churn_rate": 0.2642857142857143,
+    "description": "Card-expired subscription book. Agent should prefer payment method update.",
+    "ok": true
+  },
+  {
+    "folder": "scenario_vip_churn_seed503",
+    "seed": 503,
+    "scenario": "vip_churn",
+    "customers": 260,
+    "revenue_events": 344,
+    "recovery_rate": 0.4360730593607306,
+    "churn_rate": 0.4,
+    "description": "High LTV, elevated churn. Customer analyst + retention-sensitive strategies.",
+    "ok": true
+  },
+  {
+    "folder": "scenario_open_history_seed504",
+    "seed": 504,
+    "scenario": "open_with_history",
+    "customers": 240,
+    "revenue_events": 353,
+    "recovery_rate": 0.4613778705636743,
+    "churn_rate": 0.20833333333333334,
+    "description": "Open events that already have failed interventions. Guardrails, cooldown, reflection.",
+    "ok": true
+  }
+]
